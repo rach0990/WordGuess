@@ -1,0 +1,10 @@
+C:\Users\Lianne\source\repos\Lingo\Lingo\bin\Debug\Lingo.exe.config
+C:\Users\Lianne\source\repos\Lingo\Lingo\bin\Debug\Lingo.exe
+C:\Users\Lianne\source\repos\Lingo\Lingo\bin\Debug\Lingo.pdb
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.csprojAssemblyReference.cache
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.Properties.Resources.resources
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.csproj.GenerateResource.cache
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.csproj.CoreCompileInputs.cache
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.exe
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.pdb
+C:\Users\Lianne\source\repos\Lingo\Lingo\obj\Debug\Lingo.homepage.resources
