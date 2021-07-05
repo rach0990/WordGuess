@@ -20,7 +20,10 @@ namespace Lingo
         string medFirstLetter;
         string hardSecWrd;
         string hardFirstLetter;
+
         List<string> playGuess;
+
+        Score Testing = new Score();
 
 
 
@@ -40,6 +43,9 @@ namespace Lingo
             EasyMode restart = new EasyMode();
             secretWord = restart.randomGenerator();
             firstLetter = secretWord.Substring(0, 1);
+
+            //trying to call score
+         
 
             guess1.Text = firstLetter;
 
@@ -101,19 +107,32 @@ namespace Lingo
             string correctLetters = "";
 
 
-            if (e.KeyCode == Keys.Enter)
+           if (e.KeyCode == Keys.Enter)
             {
 
                 TextBox currentGuessBox = ((TextBox)sender);
                 string currentGuessText = currentGuessBox.Text;
                 playGuess.Add(currentGuessText);
 
+               
+               
+
+              
+
                 if (currentGuessText == secretWord)
                 {
 
                     MessageBox.Show($"Well done you have guessed the secret word");
+                  
 
                     easyPanel.Visible = false;
+
+                    
+                    Testing.EasyScore(currentGuessBox.Name);
+
+                    ScoreLabel.Text = "Score: " + Testing.score;
+                   
+                   
 
                 }
 
@@ -135,15 +154,24 @@ namespace Lingo
                         else
                         {
                             correctLetters += "?";
+                            
 
                         }
 
+                        
 
+                        
                     }
 
                    
 
                     currentGuessBox.Text = correctLetters;
+                    
+                    
+
+                  
+                    
+
                   
 
                 }
@@ -170,7 +198,7 @@ namespace Lingo
 
                     easyPanel.Visible = false;
                     //Possibly change to have button for new/next game?
-                    //does not allow for new game to start. fix that.
+                  
                 }
 
             }
@@ -186,9 +214,8 @@ namespace Lingo
         {
             string correctLetters = "";
 
-
             if (e.KeyCode == Keys.Enter)
-            {
+            {             
 
                 TextBox currentGuessBox = ((TextBox)sender);
                 string currentGuessText = currentGuessBox.Text;
@@ -324,6 +351,16 @@ namespace Lingo
         }
 
         private void createUsernameBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hardPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Scorecounter_Paint(object sender, PaintEventArgs e)
         {
 
         }
