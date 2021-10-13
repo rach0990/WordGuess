@@ -10,9 +10,8 @@ using System.Windows.Forms;
 
 namespace Lingo
 {
-    public partial class homepage : Form
+    public partial class Homepage : Form
     {
-
         
         string secretWord;
         string firstLetter;
@@ -23,29 +22,20 @@ namespace Lingo
 
         List<string> playGuess;
 
-        Score Testing = new Score();
+       readonly Score scoreCounter = new Score();
 
-
-
-        public homepage()
+        public Homepage()
         {
             InitializeComponent();
-
-     
-
-
 
             playGuess = new List<string> { };
         }
 
-        public void startNewGame()
+        public void StartNewGame()
         {
             EasyMode restart = new EasyMode();
-            secretWord = restart.randomGenerator();
+            secretWord = restart.RandomGenerator();
             firstLetter = secretWord.Substring(0, 1);
-
-            //trying to call score
-         
 
             guess1.Text = firstLetter;
 
@@ -56,7 +46,7 @@ namespace Lingo
 
 
             MediumMode MedRestart = new MediumMode();
-            medSecWrd = MedRestart.randomGenerator();
+            medSecWrd = MedRestart.RandomGenerator();
             medFirstLetter = medSecWrd.Substring(0, 1);
 
             medGuess1.Text = medFirstLetter;
@@ -67,7 +57,7 @@ namespace Lingo
             medGuess5.Clear();
 
             HardMode hardRestart = new HardMode();
-            hardSecWrd = hardRestart.randomGenerator();
+            hardSecWrd = hardRestart.RandomGenerator();
             hardFirstLetter = hardSecWrd.Substring(0, 1);
 
             hardGuess1.Text = hardFirstLetter;
@@ -76,14 +66,10 @@ namespace Lingo
             hardGuess3.Clear();
             hardGuess4.Clear();
             hardGuess5.Clear();
-
-
-
-
         }
         
 
-        private void homepage_Load(object sender, EventArgs e)
+        private void Homepage_Load(object sender, EventArgs e)
         {
 
         }
@@ -92,12 +78,11 @@ namespace Lingo
         {
             easyPanel.Visible = true;
 
-            startNewGame();
-
+            StartNewGame();
           
         }
 
-        private void easyPanel_Paint(object sender, PaintEventArgs e)
+        private void EasyPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -106,34 +91,21 @@ namespace Lingo
         {
             string correctLetters = "";
 
-
            if (e.KeyCode == Keys.Enter)
             {
-
                 TextBox currentGuessBox = ((TextBox)sender);
                 string currentGuessText = currentGuessBox.Text;
                 playGuess.Add(currentGuessText);
 
-               
-               
-
-              
-
                 if (currentGuessText == secretWord)
                 {
 
-                    MessageBox.Show($"Well done you have guessed the secret word");
-                  
-
-                    easyPanel.Visible = false;
-
+                    MessageBox.Show($"Well done you have guessed the secret word");  
                     
-                    Testing.EasyScore(currentGuessBox.Name);
-
-                    ScoreLabel.Text = "Score: " + Testing.score;
-                   
-                   
-
+                    easyPanel.Visible = false;
+                    
+                    scoreCounter.EasyScore(currentGuessBox.Name);
+                    ScoreLabel.Text = "Score: " + scoreCounter.score;
                 }
 
                 else
@@ -141,39 +113,18 @@ namespace Lingo
 
                     this.SelectNextControl((Control)sender, true, true, true, true);
 
-
                     foreach (char letter in currentGuessText)
                     {
                         if (secretWord.Contains(letter))
                         {
-
                             correctLetters += letter;
-
-
                         }
                         else
                         {
                             correctLetters += "?";
-                            
-
-                        }
-
-                        
-
-                        
+                        }       
                     }
-
-                   
-
-                    currentGuessBox.Text = correctLetters;
-                    
-                    
-
-                  
-                    
-
-                  
-
+                    currentGuessBox.Text = correctLetters;                
                 }
             }
         }
@@ -189,6 +140,7 @@ namespace Lingo
 
                     MessageBox.Show($" The secret word was {secretWord}");
                     easyPanel.Visible = false;
+                    ScoreLabel.Text = "Score: " + scoreCounter.Zero();
 
                 }
                 else
@@ -207,9 +159,10 @@ namespace Lingo
         private void MediumBtn_Click(object sender, EventArgs e)
         {
             medPanel.Visible = true;
-            startNewGame();
+            StartNewGame();
         }
 
+  
         private void EnterMed(object sender, KeyEventArgs e)
         {
             string correctLetters = "";
@@ -226,6 +179,9 @@ namespace Lingo
 
                     MessageBox.Show("Well done you have guessed the secret word");
                     medPanel.Visible = false;
+
+                    scoreCounter.EasyScore(currentGuessBox.Name);
+                    ScoreLabel.Text = "Score: " + scoreCounter.score;
                 }
 
                 else
@@ -241,24 +197,20 @@ namespace Lingo
 
                             correctLetters += letter;
 
-
                         }
                         else
                         {
                             correctLetters += "?";
 
                         }
-
-
                     }
 
                     currentGuessBox.Text = correctLetters;
                 }
             }
-
         }
 
-        private void medEnterFinal(object sender, KeyEventArgs e)
+        private void MedEnterFinal(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -268,6 +220,7 @@ namespace Lingo
                 {
                     MessageBox.Show($" The secret word was {medSecWrd}");
                     medPanel.Visible = false;
+                    ScoreLabel.Text = "Score: " + scoreCounter.Zero();
                 }
                 else
                 {
@@ -281,14 +234,12 @@ namespace Lingo
         {
 
             hardPanel.Visible = true;
-            startNewGame();
+            StartNewGame();
         }
 
         private void EnterHard(object sender, KeyEventArgs e)
         {
             string CorrectLetters = "";
-
-
 
             if (e.KeyCode == Keys.Enter)
             {
@@ -301,6 +252,9 @@ namespace Lingo
                 {
                     MessageBox.Show("Well done you have guessed the secret word");
                     hardPanel.Visible = false;
+
+                    scoreCounter.EasyScore(currentGuessBox.Name);
+                    ScoreLabel.Text = "Score: " + scoreCounter.score;
                 }
 
                 else
@@ -308,8 +262,10 @@ namespace Lingo
 
                 foreach (char Letter in currentGuessText)
                 {
+                    
                     if (hardSecWrd.Contains(Letter))
                     {
+                       
                         CorrectLetters += Letter;
 
                     }
@@ -321,13 +277,9 @@ namespace Lingo
                 currentGuessBox.Text = CorrectLetters;
                 
             }
-
-           
-
-
         }
 
-        private void hardEnterFinal(object sender, KeyEventArgs e)
+        private void HardEnterFinal(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -335,6 +287,8 @@ namespace Lingo
                 {
                     MessageBox.Show($"The secret word was: {hardSecWrd}");
                     hardPanel.Visible = false;
+                    ScoreLabel.Text = "Score: " + scoreCounter.Zero();
+
                 }
                 else
                     MessageBox.Show("Well done you have guessed the secret word");
@@ -343,19 +297,19 @@ namespace Lingo
             }
         }
 
-        private void howToPlayBtn_Click(object sender, EventArgs e)
+        private void HowToPlayBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To start the game click on what difficulty you want to play. The first box will give you what letter the word begins with. start typing your guess into the" +
                             "first box then press Enter. if you have guessed any letters correctly they will appear. watch out though they will not show you the order of the letters" +
                              "Good luck");
         }
 
-        private void createUsernameBtn_Click(object sender, EventArgs e)
+        private void CreateUsernameBtn_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void hardPanel_Paint(object sender, PaintEventArgs e)
+        private void HardPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
